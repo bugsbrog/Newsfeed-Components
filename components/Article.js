@@ -86,31 +86,97 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: "Hannah Brog's Blog",
+    date: "September 29th, 2021",
+    firstParagraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Consequat id porta nibh venenatis. Aliquet nibh praesent tristique magna sit amet. Dui sapien eget mi proin sed libero enim sed. Scelerisque purus semper eget duis at tellus at urna. Sapien nec sagittis aliquam malesuada bibendum arcu vitae. Pellentesque diam volutpat commodo sed egestas egestas fringilla phasellus. Arcu felis bibendum ut tristique et egestas.',
+    secondParagraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Turpis cursus in hac habitasse platea dictumst quisque. Lorem sed risus ultricies tristique. Arcu dictum varius duis at. Amet volutpat consequat mauris nunc congue. Quam adipiscing vitae proin sagittis nisl rhoncus mattis. Elit scelerisque mauris pellentesque pulvinar pellentesque. Volutpat odio facilisis mauris sit amet massa.',
+    thirdParagraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Faucibus interdum posuere lorem ipsum dolor sit amet consectetur adipiscing. In hac habitasse platea dictumst. Sed velit dignissim sodales ut eu. Ornare quam viverra orci sagittis. Tincidunt arcu non sodales neque sodales ut. Accumsan sit amet nulla facilisi. Sed viverra ipsum nunc aliquet bibendum.'
   }
 ];
 
-/*
-  Step 1: Write a component called 'articleMaker' to create an article.
-  Your component is a function that takes an article object as its only argument,
-  and returns a DOM node looking like the one below:
 
-  <div class="article">
-    <h2>{title of the article}</h2>
-    <p class="date">{date of the article}</p>
+//   Step 1: Write a component called 'articleMaker' to create an article.
+//   Your component is a function that takes an article object as its only argument,
+//   and returns a DOM node looking like the one below:
 
-    {three separate paragraph elements}
+//   <div class="article">
+//     <h2>{title of the article}</h2>
+//     <p class="date">{date of the article}</p>
 
-    <span class="expandButton">+</span>
-  </div>
+//     {three separate paragraph elements}
 
-  Step 2: Still inside `articleMaker`, add an event listener to the span.expandButton.
-  This listener should toggle the class 'article-open' on div.article.
+//     <span class="expandButton">+</span>
+//   </div>
 
-  Step 3: Don't forget to return something from your function!
 
-  Step 4: Outside your function now, loop over the data. At each iteration you'll use your component
-  to create a div.article element and append it to the DOM inside div.articles (see index.html).
 
-  Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
-  Refresh the page to see the new article.
-*/
+  // Step 2: Still inside `articleMaker`, add an event listener to the span.expandButton.
+  // This listener should toggle the class 'article-open' on div.article.
+
+  // Step 3: Don't forget to return something from your function!
+
+  // Step 4: Outside your function now, loop over the data. At each iteration you'll use your component
+  // to create a div.article element and append it to the DOM inside div.articles (see index.html).
+
+  // Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
+  // Refresh the page to see the new article.
+
+  const articleCont = document.querySelector('.articles')
+
+  function articleMaker(data) {
+    
+    const article = document.createElement('div')
+    article.classList.add('article')
+    
+    const titleH2 = document.createElement('h2')
+    titleH2.textContent = data.title
+    
+    const dateParagraph = document.createElement('p')
+    dateParagraph.classList.add('date')
+    dateParagraph.textContent = data.date
+  
+    const para1 = document.createElement('p')
+    para1.textContent = data.firstParagraph
+  
+    const para2 = document.createElement('p')
+    para2.textContent = data.secondParagraph
+  
+    const para3 = document.createElement('p')
+    para3.textContent = data.thirdParagraph
+  
+    const span = document.createElement('span')
+    span.classList.add('expandButton')
+    span.textContent = '+'
+
+    const newArticle = document.createElement('div')
+    newArticle.classList.add('article')
+
+    const newH2 = document.createElement('h2')
+    newH2.textContent = data.title
+
+    const newParagraph = document.createElement('p')
+    newParagraph.classList.add('date')
+    newParagraph.textContent = data.date
+
+    const newP1 = document.createElement('p')
+    newP1.textContent = data.firstParagraph
+
+    const newP2 = document.createElement('p')
+    newP2.textContent = data.secondParagraph
+
+    const newP3 = document.createElement('p')
+    newP3.textContent = data.thirdParagraph
+  
+    article.append(titleH2, dateParagraph, para1, para2, para3, span, newArticle, newH2, newParagraph, newP1, newP2, newP3)
+  
+    span.addEventListener('click', evt =>{ 
+    article.classList.toggle('article-open')
+  })
+  return article
+}
+  
+  data.forEach(element => {
+    articleCont.appendChild(articleMaker(element))
+  })
